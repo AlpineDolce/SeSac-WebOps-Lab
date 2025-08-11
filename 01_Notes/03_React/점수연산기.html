@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Score Calculator</title>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const rootNode = document.getElementById("root");
+
+    ReactDOM.createRoot(rootNode).render(
+      <React.StrictMode>
+        <h1>Hello React</h1>
+        <Score/>
+      </React.StrictMode>
+    );
+
+    function Calculator() {
+      const [name, setName] = React.useState("");
+      const [kor, setKor] = React.useState(0);
+      const [mat, setMat] = React.useState(0);
+      const [eng, setEng] = React.useState(0);
+      const [result, setResult] = React.useState("");
+
+      const process=()=>{
+        let total = parseInt(kor) + parseInt(eng) + parseInt(mat);
+        let avg = total / 3;
+        setResult(`${name}의 총점은 ${total}이고 평균은 ${avg}입니다`)
+      }
+
+      function nameChange(e){
+        setName(e.target.value);
+      }
+      function korChange(e){
+        setKor(e.target.value);
+      }
+      function matChange(e){
+        setMat(e.target.value);
+      }
+      function engChange(e){
+        setEng(e.target.value);
+      }
+
+      function clear(){
+        setName("");
+        setKor(0);
+        setMat(0);
+        setEng(0);
+        setResult("");
+      }
+
+      return (
+        <div>
+          이름: <input type="text" value={name} onChange={(e) => setName(e.target.value)} /><br/>
+          국어: <input type="number" value={kor} onChange={(e) => setKor(e.target.value)} /><br/>
+          수학: <input type="number" value={mat} onChange={(e) => setMat(e.target.value)} /><br/>
+          영어: <input type="number" value={eng} onChange={(e) => setEng(e.target.value)} /><br/>
+          <button onClick={process}>총점/평균 계산</button>
+          <h2>{name}님의 성적</h2>
+          <p>총점: {sum}</p>
+          <p>평균: {avg}</p>
+        </div>
+      );
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- React 및 Babel 라이브러리 로드 -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <!-- React가 렌더링할 대상 -->
+    <div id="root"></div>
+
+    <!-- Babel을 사용한 JSX 코드 -->
+    <script type="text/babel">
+        let rootNode = document.getElementById("root");
+
+        // 올바른 객체 이름: ReactDOM
+        ReactDOM.createRoot(rootNode).render(
+            <React.StrictMode>
+                <h1>Hello React</h1>
+                <Counter/>
+                <Counter/>
+            </React.StrictMode>
+        )
+
+        function Counter(){
+            const [number, setNumber] = React.useState(0);
+            const increase=()=>{
+                setNumber(number+1);
+            }
+            const decrease=()=>{
+                setNumber(number-1);
+            }
+            
+            return (
+                <div>
+                    <h2>{number}</h2>
+                    <button type="button" onClick={increase}>+</button>
+                    <button type="button" onClick={decrease}>-</button>
+                </div>
+            )
+        }
+    </script>
+</body>
+</html>
