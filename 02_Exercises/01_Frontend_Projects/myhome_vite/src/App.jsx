@@ -31,6 +31,7 @@ function App() {
         <Route path='/counter' element={<Counter/>} />
         <Route path='/score/list' element={<ScoreList/>} />
         <Route path='/score/insert' element={<ScoreWrite/>} />
+        <Route path='/score/write' element={<ScoreWrite/>} />
         <Route path='*' element={<Nomatch/>} />
       </Routes>
       {/*url을 바꾸면 컴포넌트가 출력될 위치*/}
