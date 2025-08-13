@@ -1,24 +1,24 @@
 import { useState, useEffect } from "react";
+import {Link} from "react-router-dom"
 import axios from "axios";
-import {Link, Routes, Route, Outlet} from "react-router-dom"
 
 function ScoreList(){
-    const [scoreList, setScoreList] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-
+    const [scoreList, setScoreList]=useState([])
+    const [isLoading, setIsLoading]=useState(true);
+    
     const loadData=()=>{
         setIsLoading(true);
-        // setScoreList([...scoreList, {"name":"홍길동", "kor":90, "eng":90, "mat":90}]);
-         axios.get("http://127.0.0.1:8000/scoreList")
-         .then((res)=>{
-            setScoreList(res.data.scoreList);
-         })
-         .catch((error)=>{
+        //setScoreList([...scoreList, {"name":"홍길동", "kor":90, "eng":90, "mat":90}]);
+        axios.get("http://127.0.0.1:8000/score/scoreList")
+        .then( (res)=>{
+            setScoreList( res.data.scoreList);
+        })
+        .catch( (error)=>{
             console.log(error);
-         })
-         .finally(()=>{
+        })
+        .finally(()=>{
             setIsLoading(false);
-         })
+        }) 
     }
 
     useEffect(()=>{
@@ -31,7 +31,7 @@ function ScoreList(){
                 isLoading?<div>loading...</div>:
                 <table>
                     {
-                        scoreList.map((item, i)=>{
+                        scoreList.map( (item, i)=>{
                             return(
                                 <tr>
                                     <td>{item.name}</td>
@@ -44,8 +44,12 @@ function ScoreList(){
                     }
                 </table>
             }
-        <Link to="/score/insert">등록</Link>
-        </div>
+        <Link className="btn btn-danger" to="/score/insert">
+          글쓰기
+        </Link>
+       
+      </div>
+        
     )
 }
 
